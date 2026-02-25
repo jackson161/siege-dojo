@@ -16,9 +16,11 @@ pub trait IActions<T> {
 pub mod actions {
     use starknet::ContractAddress;
     use dojo::model::ModelStorage;
+    use dojo::event::EventStorage;
     use siege_dojo::models::match_state::{MatchState, MatchStatus};
     use siege_dojo::models::node_state::{NodeState, NodeOwner};
     use siege_dojo::models::match_counter::MatchCounter;
+    use siege_dojo::models::events::MatchCreated;
 
     #[generate_trait]
     impl InternalImpl of InternalTrait {
@@ -63,6 +65,10 @@ pub mod actions {
                 });
                 i += 1;
             };
+
+            world.emit_event(@MatchCreated {
+                match_id, team_a_attacker, team_a_defender, team_b_attacker, team_b_defender,
+            });
 
             match_id
         }

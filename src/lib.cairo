@@ -4,6 +4,7 @@ pub mod models {
     pub mod commitment;
     pub mod round_moves;
     pub mod match_counter;
+    pub mod events;
 }
 
 pub mod systems {

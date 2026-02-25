@@ -30,7 +30,9 @@ pub mod commit_reveal {
     use siege_dojo::models::node_state::{NodeState, NodeOwner};
     use siege_dojo::models::commitment::Commitment;
     use siege_dojo::models::round_moves::RoundMoves;
+    use siege_dojo::models::events::{MoveCommitted, MoveRevealed};
     use siege_dojo::systems::resolution::{IResolutionDispatcher, IResolutionDispatcherTrait};
+    use dojo::event::EventStorage;
 
     const COMMIT_TIMEOUT: u64 = 300;
     const REVEAL_TIMEOUT: u64 = 300;
@@ -107,6 +109,7 @@ pub mod commit_reveal {
             }
 
             world.write_model(@rm);
+            world.emit_event(@MoveCommitted { match_id, round, role, timestamp: get_block_timestamp() });
         }
 
         fn reveal_attacker(
@@ -151,6 +154,7 @@ pub mod commit_reveal {
 
             c.revealed = true;
             world.write_model(@c);
+            world.emit_event(@MoveRevealed { match_id, round, role, timestamp: get_block_timestamp() });
 
             let mut rm: RoundMoves = world.read_model((match_id, round));
             rm.reveal_count += 1;
@@ -216,6 +220,7 @@ pub mod commit_reveal {
 
             c.revealed = true;
             world.write_model(@c);
+            world.emit_event(@MoveRevealed { match_id, round, role, timestamp: get_block_timestamp() });
 
             let mut rm: RoundMoves = world.read_model((match_id, round));
             rm.reveal_count += 1;

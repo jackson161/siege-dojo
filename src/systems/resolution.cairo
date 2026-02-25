@@ -6,9 +6,11 @@ pub trait IResolution<T> {
 #[dojo::contract]
 pub mod resolution {
     use dojo::model::ModelStorage;
+    use dojo::event::EventStorage;
     use siege_dojo::models::match_state::{MatchState, MatchStatus};
     use siege_dojo::models::node_state::{NodeState, NodeOwner};
     use siege_dojo::models::round_moves::RoundMoves;
+    use siege_dojo::models::events::{RoundResolved, MatchFinished};
 
     #[generate_trait]
     impl InternalImpl of InternalTrait {
@@ -92,10 +94,13 @@ pub mod resolution {
             // Win condition
             if hp_a == 0 || hp_b == 0 {
                 state.status = MatchStatus::Finished;
+                let winner = if hp_a == 0 { 2_u8 } else { 1_u8 };
+                world.emit_event(@MatchFinished { match_id, winner_team: winner });
             } else {
                 state.current_round = round + 1;
             }
 
+            world.emit_event(@RoundResolved { match_id, round, vault_a_hp: hp_a, vault_b_hp: hp_b });
             world.write_model(@state);
         }
     }
