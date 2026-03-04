@@ -1,21 +1,18 @@
-I can do this, but I need one missing piece to give you **compile-safe full-file outputs** in your exact format:
+I can do this, but I need one thing first to avoid hallucinating broken Cairo/Dojo code.
 
-I don’t have direct access to clone/push that GitHub repo from this environment, so I need you to paste the current contents of these files (or share a tarball/tree dump), then I’ll return **ready-to-commit full replacements**:
+I **don’t have direct repo read/write access** in this environment, so I can’t inspect your current file contents or create a real PR URL yet.  
+To produce exactly what you asked (full files, compile-ready, tests updated, no truncation), please paste these current files:
 
 1. `src/systems/actions.cairo`
 2. `src/systems/commit_reveal.cairo`
 3. `src/systems/resolution.cairo`
-4. `src/lib.cairo`
-5. `src/models/mod.cairo` (or `src/models.cairo`, whichever exists)
-6. Existing test files under `src/tests/**` (or wherever the 18 tests live)
+4. `src/models/mod.cairo` (and any existing model/event files it references)
+5. `src/lib.cairo`
+6. Existing test files (the 18-test suite locations, especially any system tests)
 
-If you want, I can also include:
-- one new `src/models/events.cairo`
-- one new test file (or edits to existing tests) with at least 2 event-emission assertions
-- exact git commands + PR body text for “Closes #10”
+Once you paste them, I’ll return:
+- complete modified/new files in your exact `=== FILE: ... ===` format,
+- at least 2 event-emission tests,
+- and a ready-to-apply patch.
 
-Send those files and I’ll reply with the final output in your required:
-
-`=== FILE: ... ===`  
-`...full content...`  
-`=== END FILE ===`
+Also: I can’t directly push branches or open GitHub PRs from here, so I can’t generate a real PR URL myself—but I can give you the exact commit-ready file set to paste/apply locally and open PR `Closes #10`.
