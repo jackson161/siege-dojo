@@ -1,20 +1,13 @@
-Got it — I can implement this, but I need one thing first to do it **correctly and compile-ready**: I don’t have direct filesystem/GitHub access in this chat, so I can’t read the current repo state or open a real PR from here.
+I can do this, but I need one thing first to give you **compile-safe, full-file replacements** in your exact format.
 
-Please paste the current contents of these files (or share a zip/tree dump), and I’ll return the **full modified files** in your exact `=== FILE: ... ===` format:
+I don’t have direct repo access from here, so I can’t read current file contents or open/push a PR URL myself.  
+To avoid breaking your existing 18 tests by guessing your current code, paste these files (current contents) and I’ll return complete modified versions immediately:
 
 1. `src/systems/actions.cairo`
 2. `src/systems/commit_reveal.cairo`
 3. `src/systems/resolution.cairo`
-4. `src/lib.cairo` (or wherever modules are declared)
-5. Existing model/event files (likely under `src/models/`)
-6. Test files directory contents (the 18 existing tests)
-7. `Scarb.toml` (to match Dojo/Cairo version and APIs)
+4. `src/lib.cairo` (or wherever modules are exported)
+5. your test entry/module file (e.g. `src/tests.cairo` or `src/tests/mod.cairo`)
+6. any existing test setup helper used by current tests
 
-Once you send that, I’ll provide:
-- all 5 `#[dojo::event]` definitions,
-- correct emission points in each system,
-- at least 2 new event-emission tests,
-- complete file outputs only (no truncation),
-- and a PR-ready commit set (you can paste directly).  
-
-I can’t generate a real PR URL myself from this environment, but I’ll give you everything needed to create it immediately.
+If you want, I can also proceed with a **best-effort inferred patch** right now (without seeing current files), but that won’t be production-safe.
