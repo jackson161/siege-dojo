@@ -1,18 +1,20 @@
-I can do this, but I need one thing first to avoid hallucinating broken Cairo/Dojo code.
+I can do this, but I need one missing piece to do it correctly in the exact format you requested:
 
-I **don’t have direct repo read/write access** in this environment, so I can’t inspect your current file contents or create a real PR URL yet.  
-To produce exactly what you asked (full files, compile-ready, tests updated, no truncation), please paste these current files:
+I don’t have direct read/write access to that GitHub repo from here, so I can’t:
+1. read the current file contents reliably, or  
+2. create/push a branch and return a real PR URL.
+
+To give you **complete, compile-ready full files** (not guesswork), please paste these current files (or a tarball/snippets), and I’ll return fully updated versions in your exact `=== FILE: ... ===` format:
 
 1. `src/systems/actions.cairo`
 2. `src/systems/commit_reveal.cairo`
 3. `src/systems/resolution.cairo`
-4. `src/models/mod.cairo` (and any existing model/event files it references)
-5. `src/lib.cairo`
-6. Existing test files (the 18-test suite locations, especially any system tests)
+4. `src/models.cairo` (or wherever models/events are declared)
+5. `src/lib.cairo` (module wiring)
+6. existing test files and test module index (`src/tests/...`, `src/tests.cairo` or equivalent)
+7. `Scarb.toml` (to confirm Dojo/Cairo versions and imports)
 
-Once you paste them, I’ll return:
-- complete modified/new files in your exact `=== FILE: ... ===` format,
-- at least 2 event-emission tests,
-- and a ready-to-apply patch.
+Also confirm one thing:
+- Are you on Dojo v1 event API with `world.emit_event(@Event { ... })` and `#[dojo::event]` in model modules?
 
-Also: I can’t directly push branches or open GitHub PRs from here, so I can’t generate a real PR URL myself—but I can give you the exact commit-ready file set to paste/apply locally and open PR `Closes #10`.
+Once you share that, I’ll produce the exact full-file output and include at least 2 new event-emission tests.
